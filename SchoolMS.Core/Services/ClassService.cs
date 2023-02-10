@@ -37,9 +37,31 @@ namespace SchoolMS.Core.Services
             return (List<InforClass>)classes;
         }
 
-        public Task<object> GetClassPagedList(RequestPaginate requestPaginate)
+        public async Task<object> GetClassPagedList(RequestPaginate requestPaginate)
         {
-            throw new NotImplementedException();
+            //List<string> include = new List<string> { "InformationStudents" };
+            var classList = await _unitOfWork.classInforRepository.GetPagedList(requestPaginate);
+            if (classList.Any())
+            {
+                var result = classList
+               .Select(x => new
+               {
+                   x.Id,
+                   x.ClassName,
+                   x.Grade,
+                   x.TeacherName,
+                   //InforStudent = x.InformationStudents.Select(x => new { x.StudentName, x.Gender, x.DateOfBirth, x.Address })
+               }).ToList();
+                if (result != null)
+                {
+                    //_logger.LogInformation("Student Class show information ");
+                    return result;
+                }
+                //_logger.LogError("Student Class show nothing ");
+                return null;
+            }
+            //_logger.LogError("Student Class show nothing ");
+            return null;
         }
 
         public Task<object> GetDetailClass(int id)

@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SchoolMS.Core.Aggregration.ClassAggregration.Queries;
+using SchoolMS.Core.Validation;
 
 namespace SchoolMS.API.Controllers
 {
@@ -15,9 +16,9 @@ namespace SchoolMS.API.Controllers
             _mediator = mediator;
         }
         [HttpGet]
-        public async Task<ActionResult> Get()
+        public async Task<ActionResult> Get([FromQuery]RequestPaginate requestPaginate)
         {
-            var result = await _mediator.Send(new GetClassListQuery());
+            var result = await _mediator.Send(new GetClassListQuery(requestPaginate));
             return Ok(result);
         }
     }
