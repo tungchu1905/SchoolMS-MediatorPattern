@@ -14,7 +14,7 @@ namespace SchoolMS.Core.Services.Interfaces
         Task<List<InforClass>> GetAllClass();
         Task<object> GetDetailClass(int id);
         Task<object> CraeteClass(CreateClassDTO createClassDTO);
-        Task<bool> UpdateClass(int id, UpdateClassDTO updateClassDTO);
+        Task<object> UpdateClass(int id, UpdateClassDTO updateClassDTO);
         Task<bool> DeleteClass(int id);
 
         //////// 

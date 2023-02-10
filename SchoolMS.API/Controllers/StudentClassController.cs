@@ -37,5 +37,12 @@ namespace SchoolMS.API.Controllers
             var  result = await _mediator.Send(new AddClassCommand(createClassDTO));
             return Ok(result);  
         }
+        [HttpPut]
+        public async Task<ActionResult> Put(int id, UpdateClassDTO updateClassDTO)
+
+        {
+            var  result = await _mediator.Send(new UpdateClassCommand(id, updateClassDTO));
+            return Ok(result);  
+        }
     }
 }

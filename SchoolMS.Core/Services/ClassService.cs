@@ -105,9 +105,20 @@ namespace SchoolMS.Core.Services
             return null;
         }
 
-        public Task<bool> UpdateClass(int id, UpdateClassDTO updateClassDTO)
+        public async Task<object> UpdateClass(int id, UpdateClassDTO updateClassDTO)
         {
-            throw new NotImplementedException();
+            if (id > 0)
+            {
+                var updateClass = await _unitOfWork.classInforRepository.Get(id);
+                _mapper.Map(updateClassDTO, updateClass);
+                _unitOfWork.classInforRepository.Update(updateClass);
+                _unitOfWork.Complete();
+                //_logger.LogInformation($"Update ClassName : \"{updateClass.ClassName} \" with id: \"{updateClass.Id}\" successfully ");
+
+                return updateClass;
+            }
+            //_logger.LogInformation($"Cannot Update Class ");
+            return null;
         }
     }
 }
