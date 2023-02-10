@@ -21,9 +21,24 @@ namespace SchoolMS.Core.Services
             _mapper= mapper;    
             _unitOfWork= unitOfWork;    
         }
-        public Task<bool> CraeteClass(CreateClassDTO createClassDTO)
+        public async Task<object> CraeteClass(CreateClassDTO createClassDTO)
         {
-            throw new NotImplementedException();
+            if (createClassDTO == null)
+            {
+                //_logger.LogError($"Cannot create new Class class name =\"{createClassDTO.ClassName}\".");
+                return false;
+            }
+            var newClass = _mapper.Map<InforClass>(createClassDTO);
+            await _unitOfWork.classInforRepository.Add(newClass);
+            var result = (_unitOfWork.Complete() > 0) ? true : false;
+            if(result)
+            {
+                return newClass;
+            }
+            else
+                return null;
+            //_logger.LogInformation($"Create new Class success for class : \"{createClassDTO.ClassName}\"");
+           
         }
 
         public Task<bool> DeleteClass(int id)
@@ -64,9 +79,30 @@ namespace SchoolMS.Core.Services
             return null;
         }
 
-        public Task<object> GetDetailClass(int id)
+        public async Task<object> GetDetailClass(int id)
         {
-            throw new NotImplementedException();
+            //List<string> include = new List<string> { "InformationStudents" };
+            var classes = await _unitOfWork.classInforRepository.GetAllAsync();
+            if (classes.Any())
+            {
+                var result = classes.Where(x => x.Id == id)
+               .Select(x => new
+               {
+                   x.Id,
+                   x.ClassName,
+                   x.Grade,
+                   x.TeacherName,
+                   //InforStudent = x.InformationStudents.Select(x => new { x.StudentName, x.Gender, x.DateOfBirth, x.Address })
+               }).FirstOrDefault();
+                if (result != null)
+                {
+                    //_logger.LogInformation($"Show information of Class : \"{result.ClassName}\"");
+                    return result;
+                }
+                //_logger.LogInformation($"Show information of Class with id : \"{result.Id}\"");
+                return null;
+            }
+            return null;
         }
 
         public Task<bool> UpdateClass(int id, UpdateClassDTO updateClassDTO)

@@ -7,5 +7,5 @@ using System.Threading.Tasks;
 
 namespace SchoolMS.Core.Aggregration.ClassAggregration.Queries
 {
-    public record GetClassByIdQuery(int id) : IRequest<InforClass>;
+    public record GetClassByIdQuery(int id) : IRequest<object>;
 }

@@ -1,7 +1,9 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using SchoolMS.Core.Aggregration.ClassAggregration.Commands;
 using SchoolMS.Core.Aggregration.ClassAggregration.Queries;
+using SchoolMS.Core.DTO;
 using SchoolMS.Core.Validation;
 
 namespace SchoolMS.API.Controllers
@@ -20,6 +22,20 @@ namespace SchoolMS.API.Controllers
         {
             var result = await _mediator.Send(new GetClassListQuery(requestPaginate));
             return Ok(result);
+        }
+
+        [HttpGet("{id}")]
+        public async Task<ActionResult> Get(int id)
+        {
+            return Ok(await _mediator.Send(new GetClassByIdQuery(id)));
+        }
+
+
+        [HttpPost]
+        public async Task<ActionResult> Post(CreateClassDTO createClassDTO)
+        {
+            var  result = await _mediator.Send(new AddClassCommand(createClassDTO));
+            return Ok(result);  
         }
     }
 }
