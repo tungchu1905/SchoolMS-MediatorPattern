@@ -41,9 +41,24 @@ namespace SchoolMS.Core.Services
            
         }
 
-        public Task<bool> DeleteClass(int id)
+        public async Task<bool> DeleteClass(int id)
         {
-            throw new NotImplementedException();
+            if(id > 0)
+            {
+                var del = await _unitOfWork.classInforRepository.Get(id);
+                if (del != null)
+                {
+                    _unitOfWork.classInforRepository.Delete(del);
+                    _unitOfWork.Complete();
+                    return true;
+                }
+                else
+                {
+                    return false;   
+                }
+            }
+            return false;
+
         }
 
         public async Task<List<InforClass>> GetAllClass()

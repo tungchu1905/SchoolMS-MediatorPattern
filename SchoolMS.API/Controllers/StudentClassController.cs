@@ -44,5 +44,11 @@ namespace SchoolMS.API.Controllers
             var  result = await _mediator.Send(new UpdateClassCommand(id, updateClassDTO));
             return Ok(result);  
         }
+
+        [HttpDelete]
+        public async Task<ActionResult> Delete(int id)
+        {
+            return Ok(await _mediator.Send(new DeleteClassCommand(id)));
+        }
     }
 }
