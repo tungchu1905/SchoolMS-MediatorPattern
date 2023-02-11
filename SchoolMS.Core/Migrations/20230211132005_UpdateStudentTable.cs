@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace SchoolMS.Core.Migrations
 {
-    public partial class SMSV1 : Migration
+    public partial class UpdateStudentTable : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -169,6 +169,31 @@ namespace SchoolMS.Core.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "InforStudent",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    StudentName = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    Gender = table.Column<bool>(type: "bit", nullable: false),
+                    DateOfBirth = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Address = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    FatherName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    MotherName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ClassId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_InforStudent", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_InforStudent_InforClass_ClassId",
+                        column: x => x.ClassId,
+                        principalTable: "InforClass",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.InsertData(
                 table: "InforClass",
                 columns: new[] { "Id", "ClassName", "Grade", "TeacherName" },
@@ -188,6 +213,27 @@ namespace SchoolMS.Core.Migrations
                     { 12, "1D", 1, "Vuong Thi Minh Hanh" },
                     { 13, "2C", 2, "Hoang Thi Hoa" },
                     { 14, "2D", 2, "Pham Thi Chuc" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "InforStudent",
+                columns: new[] { "Id", "Address", "ClassId", "DateOfBirth", "FatherName", "Gender", "MotherName", "StudentName" },
+                values: new object[,]
+                {
+                    { 1, "Ha Noi", 1, new DateTime(2015, 12, 31, 0, 0, 0, 0, DateTimeKind.Unspecified), "", true, "", "Nguyen Khanh Toan" },
+                    { 2, "Ha Noi", 1, new DateTime(2015, 12, 31, 0, 0, 0, 0, DateTimeKind.Unspecified), "", false, "", "Nguyen Ngoc Long" },
+                    { 3, "Ha Noi", 2, new DateTime(2015, 12, 31, 0, 0, 0, 0, DateTimeKind.Unspecified), "", true, "", "Chu Khanh Toan" },
+                    { 4, "Ha Noi", 2, new DateTime(2015, 12, 31, 0, 0, 0, 0, DateTimeKind.Unspecified), "", true, "", "Hoang Van Long" },
+                    { 5, "Ha Noi", 3, new DateTime(2014, 12, 31, 0, 0, 0, 0, DateTimeKind.Unspecified), "", false, "", "Pham Thanh Xuan" },
+                    { 6, "Ha Noi", 3, new DateTime(2014, 12, 31, 0, 0, 0, 0, DateTimeKind.Unspecified), "", true, "", "Vu Duc Khanh" },
+                    { 7, "Ha Noi", 4, new DateTime(2014, 12, 31, 0, 0, 0, 0, DateTimeKind.Unspecified), "", false, "", "Chuong Thi Khanh Toan" },
+                    { 8, "Ha Noi", 4, new DateTime(2014, 12, 31, 0, 0, 0, 0, DateTimeKind.Unspecified), "", true, "", "Nguyen Thanh Long" },
+                    { 9, "Ha Noi", 5, new DateTime(2013, 12, 31, 0, 0, 0, 0, DateTimeKind.Unspecified), "", false, "", "Do Thi Huong" },
+                    { 10, "Ha Noi", 5, new DateTime(2013, 12, 31, 0, 0, 0, 0, DateTimeKind.Unspecified), "", true, "", "Truong Dang Hieu" },
+                    { 11, "Ha Noi", 6, new DateTime(2013, 12, 31, 0, 0, 0, 0, DateTimeKind.Unspecified), "", true, "", "Truong Quoc Sinh" },
+                    { 12, "Ha Noi", 6, new DateTime(2013, 12, 31, 0, 0, 0, 0, DateTimeKind.Unspecified), "", false, "", "Nguyen Thu Huong" },
+                    { 13, "Ha Noi", 6, new DateTime(2013, 12, 31, 0, 0, 0, 0, DateTimeKind.Unspecified), "", false, "", "Do Thi Mai" },
+                    { 14, "Ha Noi", 1, new DateTime(2015, 12, 31, 0, 0, 0, 0, DateTimeKind.Unspecified), "", true, "", "Nguyen Khanh Mai" }
                 });
 
             migrationBuilder.CreateIndex(
@@ -228,6 +274,11 @@ namespace SchoolMS.Core.Migrations
                 column: "NormalizedUserName",
                 unique: true,
                 filter: "[NormalizedUserName] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_InforStudent_ClassId",
+                table: "InforStudent",
+                column: "ClassId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -248,13 +299,16 @@ namespace SchoolMS.Core.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "InforClass");
+                name: "InforStudent");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
+
+            migrationBuilder.DropTable(
+                name: "InforClass");
         }
     }
 }

@@ -69,8 +69,8 @@ namespace SchoolMS.Core.Services
 
         public async Task<object> GetClassPagedList(RequestPaginate requestPaginate)
         {
-            //List<string> include = new List<string> { "InformationStudents" };
-            var classList = await _unitOfWork.classInforRepository.GetPagedList(requestPaginate);
+            List<string> include = new List<string> { "InformationStudents" };
+            var classList = await _unitOfWork.classInforRepository.GetPagedList(requestPaginate, include);
             if (classList.Any())
             {
                 var result = classList
@@ -80,7 +80,7 @@ namespace SchoolMS.Core.Services
                    x.ClassName,
                    x.Grade,
                    x.TeacherName,
-                   //InforStudent = x.InformationStudents.Select(x => new { x.StudentName, x.Gender, x.DateOfBirth, x.Address })
+                   InforStudent = x.InformationStudents.Select(x => new { x.StudentName, x.Gender, x.DateOfBirth, x.Address })
                }).ToList();
                 if (result != null)
                 {
@@ -96,8 +96,8 @@ namespace SchoolMS.Core.Services
 
         public async Task<object> GetDetailClass(int id)
         {
-            //List<string> include = new List<string> { "InformationStudents" };
-            var classes = await _unitOfWork.classInforRepository.GetAllAsync();
+            List<string> include = new List<string> { "InformationStudents" };
+            var classes = await _unitOfWork.classInforRepository.GetAllAsync(include);
             if (classes.Any())
             {
                 var result = classes.Where(x => x.Id == id)
@@ -107,7 +107,7 @@ namespace SchoolMS.Core.Services
                    x.ClassName,
                    x.Grade,
                    x.TeacherName,
-                   //InforStudent = x.InformationStudents.Select(x => new { x.StudentName, x.Gender, x.DateOfBirth, x.Address })
+                   InforStudent = x.InformationStudents.Select(x => new { x.StudentName, x.Gender, x.DateOfBirth, x.Address })
                }).FirstOrDefault();
                 if (result != null)
                 {

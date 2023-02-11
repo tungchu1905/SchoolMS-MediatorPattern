@@ -21,10 +21,15 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 //mediatR
+builder.Services.AddMediatR(AppDomain.CurrentDomain.GetAssemblies());
+
+// add lifecircle
 builder.Services.AddTransient<IUnitOfWork, UnitOfWork>();
 builder.Services.AddScoped<IClassInforRepository, ClassRepository>();
 builder.Services.AddScoped<IClassService, ClassService>();
-builder.Services.AddMediatR(typeof(ClassRepository).Assembly);
+builder.Services.AddScoped<IStudentRepository,  StudentRepository>();
+builder.Services.AddScoped<IStudentService, StudentService>();
+
 //identity
 builder.Services.AddIdentity<IdentityUser, IdentityRole>()
     .AddEntityFrameworkStores<AppDbContext>().AddDefaultTokenProviders();

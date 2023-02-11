@@ -23,4 +23,10 @@
     <PackageReference Include="X.PagedList" Version="8.4.3" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Aggregration\StudentAggregate\Handler\" />
+    <Folder Include="Aggregration\StudentAggregate\Commands\" />
+    <Folder Include="Aggregration\StudentAggregate\Queries\" />
+  </ItemGroup>
+
 </Project>

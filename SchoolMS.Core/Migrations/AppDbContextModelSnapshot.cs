@@ -220,7 +220,7 @@ namespace SchoolMS.Core.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("SchoolMS.Core.Model.InforClass", b =>
+            modelBuilder.Entity("SchoolMS.Core.Aggregration.ClassAggregration.InforClass", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -346,6 +346,202 @@ namespace SchoolMS.Core.Migrations
                         });
                 });
 
+            modelBuilder.Entity("SchoolMS.Core.Aggregration.StudentAggregate.InforStudent", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("Address")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<int>("ClassId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("DateOfBirth")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("FatherName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("Gender")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("MotherName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("StudentName")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ClassId");
+
+                    b.ToTable("InforStudent");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Address = "Ha Noi",
+                            ClassId = 1,
+                            DateOfBirth = new DateTime(2015, 12, 31, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            FatherName = "",
+                            Gender = true,
+                            MotherName = "",
+                            StudentName = "Nguyen Khanh Toan"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Address = "Ha Noi",
+                            ClassId = 1,
+                            DateOfBirth = new DateTime(2015, 12, 31, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            FatherName = "",
+                            Gender = false,
+                            MotherName = "",
+                            StudentName = "Nguyen Ngoc Long"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Address = "Ha Noi",
+                            ClassId = 2,
+                            DateOfBirth = new DateTime(2015, 12, 31, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            FatherName = "",
+                            Gender = true,
+                            MotherName = "",
+                            StudentName = "Chu Khanh Toan"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Address = "Ha Noi",
+                            ClassId = 2,
+                            DateOfBirth = new DateTime(2015, 12, 31, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            FatherName = "",
+                            Gender = true,
+                            MotherName = "",
+                            StudentName = "Hoang Van Long"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Address = "Ha Noi",
+                            ClassId = 3,
+                            DateOfBirth = new DateTime(2014, 12, 31, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            FatherName = "",
+                            Gender = false,
+                            MotherName = "",
+                            StudentName = "Pham Thanh Xuan"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            Address = "Ha Noi",
+                            ClassId = 3,
+                            DateOfBirth = new DateTime(2014, 12, 31, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            FatherName = "",
+                            Gender = true,
+                            MotherName = "",
+                            StudentName = "Vu Duc Khanh"
+                        },
+                        new
+                        {
+                            Id = 7,
+                            Address = "Ha Noi",
+                            ClassId = 4,
+                            DateOfBirth = new DateTime(2014, 12, 31, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            FatherName = "",
+                            Gender = false,
+                            MotherName = "",
+                            StudentName = "Chuong Thi Khanh Toan"
+                        },
+                        new
+                        {
+                            Id = 8,
+                            Address = "Ha Noi",
+                            ClassId = 4,
+                            DateOfBirth = new DateTime(2014, 12, 31, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            FatherName = "",
+                            Gender = true,
+                            MotherName = "",
+                            StudentName = "Nguyen Thanh Long"
+                        },
+                        new
+                        {
+                            Id = 9,
+                            Address = "Ha Noi",
+                            ClassId = 5,
+                            DateOfBirth = new DateTime(2013, 12, 31, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            FatherName = "",
+                            Gender = false,
+                            MotherName = "",
+                            StudentName = "Do Thi Huong"
+                        },
+                        new
+                        {
+                            Id = 10,
+                            Address = "Ha Noi",
+                            ClassId = 5,
+                            DateOfBirth = new DateTime(2013, 12, 31, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            FatherName = "",
+                            Gender = true,
+                            MotherName = "",
+                            StudentName = "Truong Dang Hieu"
+                        },
+                        new
+                        {
+                            Id = 11,
+                            Address = "Ha Noi",
+                            ClassId = 6,
+                            DateOfBirth = new DateTime(2013, 12, 31, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            FatherName = "",
+                            Gender = true,
+                            MotherName = "",
+                            StudentName = "Truong Quoc Sinh"
+                        },
+                        new
+                        {
+                            Id = 12,
+                            Address = "Ha Noi",
+                            ClassId = 6,
+                            DateOfBirth = new DateTime(2013, 12, 31, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            FatherName = "",
+                            Gender = false,
+                            MotherName = "",
+                            StudentName = "Nguyen Thu Huong"
+                        },
+                        new
+                        {
+                            Id = 13,
+                            Address = "Ha Noi",
+                            ClassId = 6,
+                            DateOfBirth = new DateTime(2013, 12, 31, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            FatherName = "",
+                            Gender = false,
+                            MotherName = "",
+                            StudentName = "Do Thi Mai"
+                        },
+                        new
+                        {
+                            Id = 14,
+                            Address = "Ha Noi",
+                            ClassId = 1,
+                            DateOfBirth = new DateTime(2015, 12, 31, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            FatherName = "",
+                            Gender = true,
+                            MotherName = "",
+                            StudentName = "Nguyen Khanh Mai"
+                        });
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -395,6 +591,22 @@ namespace SchoolMS.Core.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("SchoolMS.Core.Aggregration.StudentAggregate.InforStudent", b =>
+                {
+                    b.HasOne("SchoolMS.Core.Aggregration.ClassAggregration.InforClass", "InformationClass")
+                        .WithMany("InformationStudents")
+                        .HasForeignKey("ClassId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("InformationClass");
+                });
+
+            modelBuilder.Entity("SchoolMS.Core.Aggregration.ClassAggregration.InforClass", b =>
+                {
+                    b.Navigation("InformationStudents");
                 });
 #pragma warning restore 612, 618
         }

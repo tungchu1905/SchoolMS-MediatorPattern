@@ -9,6 +9,7 @@ namespace SchoolMS.Core.DTO
     public class ClassDTO : CreateClassDTO
     {
         public int Id { get; set; }
+        public virtual ICollection<StudentDTO> StudentDTOs { get; set; } = new List<StudentDTO>();
 
     }
 
