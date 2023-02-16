@@ -29,7 +29,7 @@ namespace SchoolMS.Core.Services
                 return false;
             }
             var newClass = _mapper.Map<InforClass>(createClassDTO);
-            await _unitOfWork.classInforRepository.Add(newClass);
+            await _unitOfWork._classInforRepository.Add(newClass);
             var result = (_unitOfWork.Complete() > 0) ? true : false;
             if(result)
             {
@@ -45,10 +45,10 @@ namespace SchoolMS.Core.Services
         {
             if(id > 0)
             {
-                var del = await _unitOfWork.classInforRepository.Get(id);
+                var del = await _unitOfWork._classInforRepository.Get(id);
                 if (del != null)
                 {
-                    _unitOfWork.classInforRepository.Delete(del);
+                    _unitOfWork._classInforRepository.Delete(del);
                     _unitOfWork.Complete();
                     return true;
                 }
@@ -63,14 +63,14 @@ namespace SchoolMS.Core.Services
 
         public async Task<List<InforClass>> GetAllClass()
         {
-            var classes = await _unitOfWork.classInforRepository.GetAll();
+            var classes = await _unitOfWork._classInforRepository.GetAll();
             return (List<InforClass>)classes;
         }
 
         public async Task<object> GetClassPagedList(RequestPaginate requestPaginate)
         {
             List<string> include = new List<string> { "InformationStudents" };
-            var classList = await _unitOfWork.classInforRepository.GetPagedList(requestPaginate, include);
+            var classList = await _unitOfWork._classInforRepository.GetPagedList(requestPaginate, include);
             if (classList.Any())
             {
                 var result = classList
@@ -97,7 +97,7 @@ namespace SchoolMS.Core.Services
         public async Task<object> GetDetailClass(int id)
         {
             List<string> include = new List<string> { "InformationStudents" };
-            var classes = await _unitOfWork.classInforRepository.GetAllAsync(include);
+            var classes = await _unitOfWork._classInforRepository.GetAllAsync(include);
             if (classes.Any())
             {
                 var result = classes.Where(x => x.Id == id)
@@ -124,9 +124,9 @@ namespace SchoolMS.Core.Services
         {
             if (id > 0)
             {
-                var updateClass = await _unitOfWork.classInforRepository.Get(id);
+                var updateClass = await _unitOfWork._classInforRepository.Get(id);
                 _mapper.Map(updateClassDTO, updateClass);
-                _unitOfWork.classInforRepository.Update(updateClass);
+                _unitOfWork._classInforRepository.Update(updateClass);
                 _unitOfWork.Complete();
                 //_logger.LogInformation($"Update ClassName : \"{updateClass.ClassName} \" with id: \"{updateClass.Id}\" successfully ");
 
