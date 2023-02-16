@@ -11,7 +11,7 @@ namespace SchoolMS.Core.Repository.UnitOfWork
     public  interface IUnitOfWork : IDisposable
     {
         IClassInforRepository _classInforRepository { get; }
-        //IStudentRepository _studentRepository { get; }
+        IStudentRepository _studentRepository { get; }
 
         int Complete();
     }

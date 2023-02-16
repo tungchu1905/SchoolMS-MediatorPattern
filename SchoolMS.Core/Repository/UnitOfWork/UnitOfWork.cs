@@ -12,15 +12,15 @@ namespace SchoolMS.Core.Repository.UnitOfWork
     {
         public readonly AppDbContext _context;
         public IClassInforRepository _classInforRepository { get; }
-        //public IStudentRepository _studentRepository { get; }
+        public IStudentRepository _studentRepository { get; }
 
         public UnitOfWork(AppDbContext context, IClassInforRepository ClassInforRepository
-            //, IStudentRepository studentRepository
+,               IStudentRepository studentRepository
             )
         {
             _context = context;
             _classInforRepository = ClassInforRepository;
-            //_studentRepository = studentRepository;
+            _studentRepository = studentRepository;
         }
         public int Complete()
         {

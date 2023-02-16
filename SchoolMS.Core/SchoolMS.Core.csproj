@@ -24,9 +24,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Aggregration\StudentAggregate\Handler\" />
     <Folder Include="Aggregration\StudentAggregate\Commands\" />
-    <Folder Include="Aggregration\StudentAggregate\Queries\" />
   </ItemGroup>
 
 </Project>
