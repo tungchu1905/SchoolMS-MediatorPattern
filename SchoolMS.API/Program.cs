@@ -11,7 +11,7 @@ using SchoolMS.Core.Services.Interfaces;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-//AutoMapper
+// AutoMapper
 builder.Services.AddAutoMapper(typeof(Program));
 
 
@@ -19,7 +19,9 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-
+// add newton
+builder.Services.AddControllers().AddNewtonsoftJson(op =>
+op.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
 //mediatR
 builder.Services.AddMediatR(AppDomain.CurrentDomain.GetAssemblies());
 
@@ -27,7 +29,8 @@ builder.Services.AddMediatR(AppDomain.CurrentDomain.GetAssemblies());
 builder.Services.AddTransient<IUnitOfWork, UnitOfWork>();
 builder.Services.AddScoped<IClassInforRepository, ClassRepository>();
 builder.Services.AddScoped<IClassService, ClassService>();
-builder.Services.AddScoped<IStudentRepository,  StudentRepository>();
+
+builder.Services.AddScoped<IStudentRepository, StudentRepository>();
 builder.Services.AddScoped<IStudentService, StudentService>();
 
 //identity

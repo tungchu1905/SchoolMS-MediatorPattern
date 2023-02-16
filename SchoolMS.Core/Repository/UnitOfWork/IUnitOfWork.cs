@@ -10,7 +10,8 @@ namespace SchoolMS.Core.Repository.UnitOfWork
 {
     public  interface IUnitOfWork : IDisposable
     {
-        IClassInforRepository classInforRepository { get; }
+        IClassInforRepository _classInforRepository { get; }
+        //IStudentRepository _studentRepository { get; }
 
         int Complete();
     }
