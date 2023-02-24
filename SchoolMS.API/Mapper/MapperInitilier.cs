@@ -13,7 +13,6 @@ namespace SchoolMS.API.Mapper
             CreateMap<InforClass, ClassDTO>().ReverseMap();
 
             CreateMap<InforStudent, CreateStudentDTO>().ReverseMap();
-            CreateMap<InforStudent, StudentDTO>().ReverseMap();
         }
     }
 }
