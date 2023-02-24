@@ -9,7 +9,7 @@ namespace SchoolMS.API.Mapper
     {
         public MapperInitilier()
         {
-            CreateMap<InforClass, CreateClassDTO>().ReverseMap();
+            CreateMap<InforClass, CreateClassDTO>().ReverseMap() ;
             CreateMap<InforClass, ClassDTO>().ReverseMap();
 
             CreateMap<InforStudent, CreateStudentDTO>().ReverseMap();
