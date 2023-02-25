@@ -10,4 +10,5 @@ namespace SchoolMS.Core.Aggregration.ClassAggregration.Commands
 {
     public record AddClassCommand(CreateClassDTO CreateClassDTO) : IRequest<object>;
 
+
 }
